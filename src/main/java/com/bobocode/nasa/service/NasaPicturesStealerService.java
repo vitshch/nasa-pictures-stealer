@@ -32,9 +32,9 @@ public class NasaPicturesStealerService {
         List<PhotoDto> nasaMarsPictures = nasaPhotoService.getNasaMarsPictures(sol);
         LOG.debug("Fetched {} photos from nasa by sol {}", nasaMarsPictures.size(), sol);
 
-        Map<CameraDto, List<PhotoDto>> cameraDtos = nasaMarsPictures.stream()
-                .collect(Collectors.groupingBy(PhotoDto::camera));
-        cameraDtos.forEach(this::mapCamera);
+        nasaMarsPictures.stream()
+                .collect(Collectors.groupingBy(PhotoDto::camera))
+                .forEach(this::mapCamera);
     }
 
     private Camera mapCamera(CameraDto cameraDto, List<PhotoDto> photoDtos) {
